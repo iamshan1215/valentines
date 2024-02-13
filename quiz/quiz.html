@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Note Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff4d6b;
+        }
+        p {
+            color: #666;
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .answer-input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px auto;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .submit-button {
+            background-color: #ff4d6b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: "Comic Sans MS", cursive, sans-serif; /* Cute font */
+        }
+        .submit-button:hover {
+            background-color: #ff3355;
+        }
+        #result {
+            display: none; /* Hide result initially */
+            margin-top: 30px;
+        }
+        #love-letter {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="question1" class="question">Question 1: What is 10 + 5?</div>
+        <input id="answer1" type="number" class="answer-input" placeholder="Your answer...">
+        <br>
+        <div></div>
+        
+        <button id="submit1" class="submit-button" onclick="checkAnswer(1)">Submit</button>
+        
+        <div id="question2" class="question" style="display: none;">Question 2: What is 15 - 7?</div>
+        <input id="answer2" type="number" class="answer-input" placeholder="Your answer..." style="display: none;">
+        <br>
+        <div></div>
+        <div></div>
+        <div></div>
+        <button id="submit2" class="submit-button" onclick="checkAnswer(2)" style="display: none;">Submit</button>
+
+        <div id="result"></div>
+        <div id="love-letter" style="display: none;">
+            <h2>Congratulations!</h2>
+            <p>Here's a special love note just for you:</p>
+            <p>"Roses are red, violets are blue,</p>
+            <p>You're the one that I always knew.</p>
+            <p>In your eyes, I see the stars,</p>
+            <p>With you, I've found love that's ours."</p>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(questionNumber) {
+            let answer;
+            let correctAnswer;
+            let nextQuestionNumber;
+            let nextButton;
+
+            switch (questionNumber) {
+                case 1:
+                    answer = parseInt(document.getElementById('answer1').value);
+                    correctAnswer = 15;
+                    nextQuestionNumber = 2;
+                    nextButton = document.getElementById('submit2');
+                    break;
+                case 2:
+                    answer = parseInt(document.getElementById('answer2').value);
+                    correctAnswer = 8;
+                    nextQuestionNumber = 3;
+                    nextButton = document.getElementById('love-letter');
+                    break;
+            }
+
+            if (answer === correctAnswer) {
+                document.getElementById('question' + questionNumber).style.display = 'none';
+                document.getElementById('answer' + questionNumber).style.display = 'none';
+                document.getElementById('submit' + questionNumber).style.display = 'none';
+
+                if (nextQuestionNumber !== 3) {
+                    document.getElementById('question' + nextQuestionNumber).style.display = 'block';
+                    document.getElementById('answer' + nextQuestionNumber).style.display = 'block';
+                    document.getElementById('submit' + nextQuestionNumber).style.display = 'block';
+                } else {
+                    nextButton.style.display = 'block';
+                }
+            } else {
+                alert('Incorrect answer. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
